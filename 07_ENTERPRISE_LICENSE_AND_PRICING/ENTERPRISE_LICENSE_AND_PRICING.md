@@ -1,0 +1,25 @@
+# Enterprise License and Pricing — WASTEBOT
+
+**Company:** Anticloud FZ LLE
+**Model:** PAX L5 Narrow L2 General 27B
+**Project:** WASTEBOT | Category: WASTE_MANAGEMENT
+**Upstream:** https://github.com/nicedoc/wastebot (MIT)
+
+## Overview
+
+This document covers enterprise license and pricing for the Anticloud integration of WASTEBOT.
+
+IoT waste bin monitoring system
+
+## Anticloud Integration
+
+PAX L5 Narrow L2 General 27B is integrated into WASTEBOT to provide:
+- Local AI inference with zero cloud dependency
+- AIOSS tamper-evident audit chain
+- AES-256 encryption at rest
+- Single-binary deployment
+
+## Contact
+
+Lois-Kleinner Alpasan — CEO & CTO, Anticloud FZ LLE
+lois@0-1.gg | 0-1.gg
