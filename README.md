@@ -1,247 +1,44 @@
 # WASTEBOT
 
-**Category:** WASTE_MANAGEMENT
-**Status:** Active development with Anticloud overlay
+> Anticloud offline package — upstream: Japkeerat/WasteBot @ `master`.
 
 ## What This Project Does
 
-WASTEBOT is an open-source project in the WASTE_MANAGEMENT category.
+Open-source Jupyter Notebook package in the scan_results_all.txt category, rebuilt with the Anticloud 12-improvement overlay.
 
-This project provides tools, libraries, and functionality for developers
-and end users working in the WASTE_MANAGEMENT domain. It is part of the
-Anticloud ecosystem, which adds measured performance improvements,
-security hardening, and comprehensive documentation to upstream
-open-source projects.
+## Upstream README
 
-The project addresses key challenges in WASTE_MANAGEMENT by providing:
+# WasteBot
 
-- A well-tested, community-driven codebase
-- Standard interfaces compatible with the broader ecosystem
-- Documentation and examples for common use cases
-- Integration points for the Anticloud overlay improvements
 
-## Installation
+WasteBot was researched and developed by us during January - November 2019 as a Capstone project at Thapar Institute of Engineering and Technology.
 
-### Prerequisites
+![Robotic Arm](https://github.com/Japkeerat/WasteBot/blob/master/project-photo.jpg)
 
-Before installing WASTEBOT, ensure you have the following:
+This prototype uses deep learning, image processing, and some electronics to segregate solid waste into three different categories - Biodegradable, Recyclable, and Non-Recyclable waste.
 
-- A compatible operating system (Linux, macOS, or Windows)
-- Required build tools as specified by the upstream project
-- Runtime dependencies per the upstream requirements
+After going through various failed approaches during our course, we selected to go with transfer learning with VGG-16 as it gave an accuracy of 85.49%. We also observed, more the complex algorithm we chose for transfer learning (For example, ResNet-34, ResNet-50, DenseNet) more bad the model got. So ideal approach looked to use neural network with lesser layers.
 
-### From Source
+Next thing was to handle large computations on Raspberry Pi. As the RAM on Pi is extremely limited (1 GB), idea was to do all the processing on seperate device and only use Pi to control the Robot. This also introduced us to tons of new things to take control of during implementation of Socket Programming. To optimize the time taken to transfer a file and prevent that file to encounter errors during working with OpenCV, we had to choose a non-conventional way of file transfer.
 
-To build from source, clone the repository and follow the
-upstream build instructions:
+The trained model .hdf5 file can be viewed [here](https://drive.google.com/open?id=1a9mrDxD_9jNlfRWcUz3_OCpI_6kStICh). This file is of 520MB. Using this model, the predictions on the image received are made, and the prediction is sent back to the Raspberry Pi which based on the prediction controls the motors of the robot.
 
-```bash
-git clone https://github.com/al4224t/wastebot/wastebot.git
-cd wastebot
-make
-sudo make install
-```
+The video explaining the prototype can be viewed [here in this repository](https://github.com/Japkeerat/WasteBot/blob/master/Project%20Explanation%20Video.m4v)
 
-### Package Managers
+#### Developers
+* Harshul Agarwal ([LinkedIn](https://www.linkedin.com/in/harshul-agarwal-1b2313144/))
+* Javesh Vasu ([LinkedIn](https://www.linkedin.com/in/javesh-k-5a6a20120/))
+* Abhishek Nayyar ([LinkedIn](https://www.linkedin.com/in/abhishek-nayyar-495536145/))
+* Japkeerat Singh ([LinkedIn](https://www.linkedin.com/in/japkeeratsingh/))
 
-Depending on your platform, WASTEBOT may be available
-through package managers such as apt, brew, or pip. Refer to
-the upstream documentation for platform-specific instructions.
 
-## Usage
-
-### Basic Usage
-
-After installation, WASTEBOT can be invoked as follows:
-
-```bash
-wastebot --help
-wastebot
-```
-
-### Common Operations
-
-1. **Initialization** - Set up the project environment and configuration
-2. **Execution** - Run the main functionality with appropriate parameters
-3. **Monitoring** - Check status and output during operation
-4. **Shutdown** - Cleanly terminate and save state
-
-### Examples
-
-```bash
-wastebot --input /path/to/input --output /path/to/output
-wastebot --config /path/to/config.yaml
-wastebot --verbose --log-level debug
-```
-
-## API
-
-### Overview
-
-WASTEBOT exposes a standard API consistent with its category.
-The API can be accessed programmatically or through the command
-line interface.
-
-### Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /status | Get current status |
-| POST | /execute | Execute main operation |
-| GET | /results | Retrieve results |
-| DELETE | /reset | Reset to initial state |
-
-### Authentication
-
-API authentication is handled through standard mechanisms.
-Refer to the upstream documentation for specific authentication
-requirements and token management.
-
-### Rate Limiting
-
-The API implements rate limiting to prevent abuse. Default limits
-are configurable through the configuration file.
-
-## Dependencies
-
-### Build Dependencies
-
-- Compiler (GCC, Clang, or MSVC)
-- Build system (Make, CMake, or Meson)
-- Package manager (pip, npm, or cargo)
-
-### Runtime Dependencies
-
-Runtime dependencies are managed by the upstream project build
-system. Key dependencies include:
-
-- Standard library components
-- Third-party libraries as specified in upstream documentation
-- System libraries required for operation
-
-### Optional Dependencies
-
-Some features may require additional optional dependencies.
-These are documented in the upstream README and can be
-installed separately as needed.
-
-## Configuration
-
-### Configuration File
-
-WASTEBOT uses a configuration file for runtime settings.
-The default location is typically:
-
-- **Linux/macOS:** ~/.config/wastebot/config.yaml
-- **Windows:** %APPDATA%\wastebot\config.yaml
-
-### Configuration Options
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| log_level | string | info | Logging verbosity |
-| output_dir | string | ./output | Output directory |
-| max_workers | int | 4 | Maximum worker threads |
-| timeout | int | 30 | Operation timeout (seconds) |
-
-### Environment Variables
-
-The following environment variables can override configuration:
-
-- **WASTEBOT_LOG_LEVEL** - Override log level
-- **WASTEBOT_CONFIG** - Path to custom config file
-- **WASTEBOT_OUTPUT** - Override output directory
-
-## Contributing
-
-Contributions to WASTEBOT are welcome. Please follow
-these guidelines:
-
-1. **Fork the repository** and create a feature branch
-2. **Make your changes** with clear commit messages
-3. **Add tests** for new functionality
-4. **Update documentation** as needed
-5. **Submit a pull request** with a clear description
-
-### Code Style
-
-Follow the code style established in the upstream project.
-Use consistent formatting, meaningful variable names, and
-clear comments for complex logic.
-
-### Reporting Issues
-
-When reporting issues, please include:
-
-- Operating system and version
-- Project version or commit hash
-- Steps to reproduce the issue
-- Expected vs actual behavior
-- Relevant log output
+#### References
+* [Classification of Trash for Recyclable Status](https://pdfs.semanticscholar.org/c908/11082924011c73fea6252f42b01af9076f28.pdf?_ga=2.147552948.2039321784.1574850723-1144123513.1574850723) by Gary Thung
 
 ## License
 
-**Overlay license:** Anticommons 0.1.0
-**Upstream license:** MIT
+Upstream terms preserved in `THIRD_PARTY_LICENSES/`. Overlay licensed under Anticommons 0.1.0.
 
-This project is distributed under the MIT license.
-The Anticloud overlay is licensed under Anticommons 0.1.0,
-which ensures that improvements remain available to the
-community while preventing enclosure by any single entity.
+## Verification
 
-## Upstream
-
-**SHA-256:** `4296f4ad8a4789a175a690120d8f2273beeefabf`
-
-The upstream project is pinned to the above commit hash
-to ensure reproducible builds and verifiable provenance.
-
-## Benchmarks
-
-Benchmark results are recorded in BENCH.json.
-
-Measurements were taken on the upstream codebase with the
-Anticloud overlay applied. Key metrics include:
-
-- **Build time** - Time to compile from source
-- **Binary size** - Compiled artifact size
-- **Runtime performance** - Execution speed benchmarks
-- **Memory usage** - Peak and average memory consumption
-- **Test coverage** - Percentage of code covered by tests
-
-All measurements are reproducible and verified against the
-pinned upstream commit.
-
-## Additional Information
-
-This project is part of the Anticloud ecosystem, providing
-WASTE_MANAGEMENT functionality with measured performance characteristics.
-
-The overlay adds 12 improvements including performance
-optimizations, security hardening, documentation generation,
-benchmark measurement, license compliance, dependency auditing,
-SBOM generation, seal verification, quality gates, contamination
-detection, press distribution, and family background integration.
-
-## Archives and Permanent Records
-
-| Platform | Identifier | Volume |
-|---|---|---|
-| Harvard Dataverse | DOI 10.7910/DVN/YMJKOG | 145 citable datasets |
-| AIOSS verification kit | DOI 10.7910/DVN/OORKNJ | Offline hash verification |
-| Zenodo (CERN) | — | 146 records, DOI-registered |
-| OSF | — | 144 preregistered records |
-| Figshare | author 20849885 | Research data and figures |
-| Internet Archive | aioss-format, Anticode | Permanent binary specification |
-| ORCID | 0009-0009-2233-6107 | Permanent researcher ID |
-| Kaggle | pax-millennium-20 | Reproducible T4 benchmark run |
-
-
-
-## Press and Independent Publication
-
-The PAX benchmark release was distributed by Newsfile wire to 336 outlets
-(312 Web, 23 Terminal, 1 Application), including Yahoo Finance, The Globe and Mail, Business Insider, National Post, Financial Post, StreetInsider, Digital Journal, Barchart, International Business Times, and fox47 · National Law Review.
-Wire distribution makes the announcement dated, public, and indexed, which
-makes the claim checkable.
-
+Recompute the SHA3-256 of `BENCH.json` and compare to this package’s register. Any drift = invalid package.
